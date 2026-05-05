@@ -1,1 +1,71 @@
+function doGet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+ 
+  // Melewati header (baris pertama)
+  var rows = data.slice(1);
+ 
+  return ContentService.createTextOutput(JSON.stringify(rows))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var p = e.parameter;
+ 
+  // Menambah baris baru (Tanggal, Nama, Motor, Keluhan, Status, Biaya)
+  sheet.appendRow([new Date(), p.nama, p.motor, p.keluhan, "Proses", p.biaya]);
+ 
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Monitoring Bengkel - SMK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistem Monitoring Servis Bengkel</h1>
+            <p>Pencatatan Real-time via Google Sheets</p>
+        </header>
+
+        <div class="form-section">
+            <h3>Input Servis Baru</h3>
+            <div class="form-grid">
+                <input type="text" id="nama" placeholder="Nama Pemilik">
+                <input type="text" id="motor" placeholder="Jenis Motor">
+                <input type="text" id="keluhan" placeholder="Keluhan">
+                <input type="number" id="biaya" placeholder="Estimasi Biaya">
+            </div>
+            <button id="btnSimpan">Simpan Data</button>
+        </div>
+
+        <div class="table-section">
+            <h3>Daftar Riwayat Servis</h3>
+            <div id="loading" class="loading">Menghubungkan ke Database...</div>
+            <table id="tableServis" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Tgl/No</th>
+                        <th>Pemilik</th>
+                        <th>Motor</th>
+                        <th>Keluhan</th>
+                        <th>Tindakan</th>
+                        <th>Biaya</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
 
