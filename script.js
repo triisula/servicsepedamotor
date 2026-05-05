@@ -1,5 +1,5 @@
 // GANTI DENGAN URL WEB APP DARI GOOGLE APPS SCRIPT
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbwswc3KitZeYyFA69ofR7A5pYmWhfEIJMlDPXesPgcRV181sBJsG0LD4Ms43GuHpFHDzg/exec';
+jr1 = 'https://script.google.com/macros/s/AKfycbxfd87bZ_QUQZD6bB6eP_oalV-3J2omPpER6gAbQMB4ZHSFH6s9qg2feMTnB2ow9Vov/exec';
 
 // FUNGSI MEMBACA DATA (READ)
 async function loadData() {
